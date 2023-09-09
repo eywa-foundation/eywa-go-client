@@ -1,0 +1,13 @@
+syntax = "proto3";
+package eywa.eywa;
+
+option go_package = "github.com/eywa-foundation/eywa-go-client/x/eywa/types";
+
+message Handshake {
+  
+  string sender = 1; 
+  string receiver = 2; 
+  string hashId = 3; 
+  string roomId = 4; 
+  string serverAddress = 5; 
+}
