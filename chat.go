@@ -12,15 +12,43 @@ import (
 	"github.com/eywa-foundation/eywaclient/types"
 )
 
+func CreateChatTx(accountName, roomID, from, to, message string) error {
+	ctx := context.Background()
+	client, err := createClient(ctx)
+	if err != nil {
+		return err
+	}
+
+	relayAccount, _, err := getAccount(client, accountName)
+	if err != nil {
+		return err
+	}
+
+	msg := &types.MsgCreateChat{
+		Creator:  from,
+		RoomId:   roomID,
+		Receiver: to,
+		Message:  message,
+		Time:     getTimestamp(),
+	}
+	txResp, err := client.BroadcastTx(ctx, relayAccount, msg)
+	if err != nil {
+		return err
+	}
+	log.Println("MsgCreateChat ->")
+	log.Println(txResp)
+
+	return nil
+}
+
 func PostRegister() {
 	ctx := context.Background()
-	addressPrefix := "cosmos"
 
 	// Create a Cosmos client instance
 	client, err := cosmosclient.New(
 		ctx,
-		cosmosclient.WithAddressPrefix(addressPrefix),
-		cosmosclient.WithNodeAddress("http://localhost:26657"),
+		cosmosclient.WithAddressPrefix(ADDRESS_PREFIX),
+		cosmosclient.WithNodeAddress(NODE_ADDRESS),
 	)
 	if err != nil {
 		log.Fatal(err)
@@ -35,7 +63,7 @@ func PostRegister() {
 		log.Fatal(err)
 	}
 
-	addr, err := account.Address(addressPrefix)
+	addr, err := account.Address(ADDRESS_PREFIX)
 	if err != nil {
 		log.Fatal(err)
 	}
