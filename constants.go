@@ -9,14 +9,12 @@ import (
 )
 
 const ADDRESS_PREFIX = "cosmos"
-const NODE_ADDRESS = "http://localhost:26657"
 
-func createClient(ctx context.Context) (cosmosclient.Client, error) {
+func createClient(ctx context.Context, nodeAddress string) (cosmosclient.Client, error) {
 	return cosmosclient.New(
 		ctx,
 		cosmosclient.WithAddressPrefix(ADDRESS_PREFIX),
-		cosmosclient.WithNodeAddress(NODE_ADDRESS),
-	)
+		cosmosclient.WithNodeAddress(nodeAddress))
 }
 
 func getAccount(client cosmosclient.Client, accountName string) (cosmosaccount.Account, string, error) {

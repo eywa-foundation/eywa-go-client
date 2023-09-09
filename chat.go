@@ -2,19 +2,18 @@ package eywaclient
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	// Importing the general purpose Cosmos blockchain client
-	"github.com/ignite/cli/ignite/pkg/cosmosclient"
+	// "github.com/ignite/cli/ignite/pkg/cosmosclient"
 
 	// Importing the types package of your blog blockchain
 	"github.com/eywa-foundation/eywaclient/types"
 )
 
-func CreateChatTx(accountName, roomID, from, to, message string) error {
+func CreateChatTx(nodeAddress, accountName, roomID, from, to, message string) error {
 	ctx := context.Background()
-	client, err := createClient(ctx)
+	client, err := createClient(ctx, nodeAddress)
 	if err != nil {
 		return err
 	}
@@ -41,14 +40,15 @@ func CreateChatTx(accountName, roomID, from, to, message string) error {
 	return nil
 }
 
-func PostRegister() {
+/*
+func GetPostQuery(nodeAddress string) {
 	ctx := context.Background()
 
 	// Create a Cosmos client instance
 	client, err := cosmosclient.New(
 		ctx,
 		cosmosclient.WithAddressPrefix(ADDRESS_PREFIX),
-		cosmosclient.WithNodeAddress(NODE_ADDRESS),
+		cosmosclient.WithNodeAddress(nodeAddress),
 	)
 	if err != nil {
 		log.Fatal(err)
@@ -68,24 +68,6 @@ func PostRegister() {
 		log.Fatal(err)
 	}
 
-	// Define a message to create a post
-	msg := &types.MsgRegisterUser{
-		Creator: addr,
-		Pubkey:  "pubkey",
-	}
-	fmt.Println("Addr: ", addr)
-
-	// Broadcast a transaction from account `alice` with the message
-	// to create a post store response in txResp
-	txResp, err := client.BroadcastTx(ctx, account, msg)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Print response from broadcasting a transaction
-	fmt.Print("MsgCreateUser:\n\n")
-	fmt.Println(txResp)
-
 	// Instantiate a query client for your `blog` blockchain
 	queryClient := types.NewQueryClient(client.Context())
 
@@ -100,3 +82,4 @@ func PostRegister() {
 	fmt.Print("\n\nAll user:\n\n")
 	fmt.Println(queryResp)
 }
+*/
