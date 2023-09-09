@@ -1,4 +1,4 @@
-module github.com/eywa-foundation/eywa-go-client/eywaclient
+module github.com/eywa-foundation/eywaclient
 
 go 1.20
 

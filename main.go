@@ -9,7 +9,7 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
 
 	// Importing the types package of your blog blockchain
-	"github.com/eywa-foundation/eywa-go-client/eywaclient/types"
+	"github.com/eywa-foundation/eywaclient/types"
 )
 
 func PostRegister() {
