@@ -17,11 +17,11 @@ func createClient(ctx context.Context, nodeAddress string) (cosmosclient.Client,
 		cosmosclient.WithNodeAddress(nodeAddress))
 }
 
-func getAccount(client cosmosclient.Client, accountName string) (cosmosaccount.Account, string, error) {
+func getAccount(client cosmosclient.Client, accountName, mnemonic string) (cosmosaccount.Account, string, error) {
 	var addr string
 
+	account, err := client.AccountRegistry.Import(accountName, mnemonic, "")
 	// Get account from the keyring
-	account, err := client.Account(accountName)
 	if err != nil {
 		return account, addr, err
 	}

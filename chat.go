@@ -11,14 +11,14 @@ import (
 	"github.com/eywa-foundation/eywaclient/types"
 )
 
-func CreateChatTx(nodeAddress, accountName, roomID, from, to, message string) error {
+func CreateChatTx(nodeAddress, accountName, mnemonic, roomID, from, to, message string) error {
 	ctx := context.Background()
 	client, err := createClient(ctx, nodeAddress)
 	if err != nil {
 		return err
 	}
 
-	relayAccount, _, err := getAccount(client, accountName)
+	relayAccount, _, err := getAccount(client, accountName, mnemonic)
 	if err != nil {
 		return err
 	}
